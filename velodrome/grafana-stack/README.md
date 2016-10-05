@@ -1,7 +1,8 @@
 The goal of this directory is to set-up the following monitoring stack:
 - InfluxDB as the Time-series Database
 - Grafana as the front-end/display
-- Nginx is use as a proxy (mostly to fix CORS issue)
+- Prometheus as a different flavor of time-series database
+- Nginx is used as a proxy (mostly to fix CORS issue)
 
 Step-by-step
 ============
@@ -30,7 +31,7 @@ Adding data-source
 ------------------
 First, you need to create the grafana user in Influxdb:
 ```
-kubectl exec -i -t influxdb-123456789-abcde influx -username=root -password="${influxdb_password}" -execute "create user grafana with password 'password'; grant read on github to grafana"
+kubectl exec -i -t influxdb-123456789-abcde influx -username=root -password="${influxdb_password}" -execute "create user grafana with password 'password'; grant read on github to grafana; grant read on github to monitoring"
 ```
 
 Probably a first time only:
